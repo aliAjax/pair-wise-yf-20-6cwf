@@ -18,7 +18,8 @@ body {
 }
 
 button,
-input {
+input,
+select {
   font: inherit;
 }
 
@@ -29,6 +30,12 @@ button {
   background: #ffffff;
   color: #172033;
   cursor: pointer;
+  padding: 0 12px;
+}
+
+button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
 }
 
 .app {
@@ -47,7 +54,7 @@ button {
 }
 
 .hero {
-  min-height: 250px;
+  min-height: 220px;
   display: grid;
   align-content: center;
   gap: 14px;
@@ -68,13 +75,12 @@ button {
 }
 
 .hero h1 {
-  font-size: clamp(34px, 6vw, 62px);
+  font-size: clamp(34px, 6vw, 56px);
   line-height: 1;
-  letter-spacing: 0;
 }
 
 .hero span {
-  max-width: 860px;
+  max-width: 900px;
   color: #526071;
   line-height: 1.75;
 }
@@ -101,33 +107,26 @@ button {
   font-size: 30px;
 }
 
-.workspace {
+.console {
   display: grid;
-  grid-template-columns: 300px 1fr;
+  grid-template-columns: 320px 1fr;
   gap: 18px;
   margin-bottom: 18px;
 }
 
 .panel {
   padding: 22px;
+  margin-bottom: 18px;
+}
+
+.console .panel {
+  margin-bottom: 0;
 }
 
 .panel h2,
 .panel h3,
 .heading p {
   margin-top: 0;
-}
-
-.chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.chips button {
-  padding: 0 12px;
-  border-color: color-mix(in srgb, var(--primary) 24%, var(--border));
-  background: color-mix(in srgb, var(--primary) 8%, #ffffff);
 }
 
 .heading {
@@ -142,6 +141,10 @@ button {
   margin-bottom: 0;
 }
 
+.heading p {
+  margin-bottom: 4px;
+}
+
 .primary {
   background: var(--primary);
   color: #ffffff;
@@ -149,9 +152,185 @@ button {
   padding: 0 14px;
 }
 
+/* 气象与节目 */
+
+.wind-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.segments {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.segments li {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #fbfdff;
+  font-size: 14px;
+}
+
+.segments li span {
+  color: #64748b;
+}
+
+.segments .show-end {
+  border-style: dashed;
+  color: var(--secondary);
+  font-weight: 700;
+  justify-content: center;
+}
+
+/* 点位界面 */
+
+.map-panel {
+  overflow: hidden;
+}
+
+.legend {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #64748b;
+  font-size: 13px;
+}
+
+.dot {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-left: 8px;
+}
+
+.dot-ok {
+  background: rgba(245, 158, 11, 0.55);
+}
+
+.dot-draft {
+  background: rgba(29, 78, 216, 0.35);
+}
+
+.dot-bad {
+  background: rgba(220, 38, 38, 0.6);
+}
+
+.point-map {
+  width: 100%;
+  height: auto;
+  display: block;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.map-ground {
+  fill: #f2f7f0;
+}
+
+.map-grid {
+  stroke: #dbe5d8;
+  stroke-width: 1;
+}
+
+.map-zone {
+  fill: rgba(220, 38, 38, 0.14);
+  stroke: var(--secondary);
+  stroke-width: 1.5;
+  stroke-dasharray: 6 4;
+}
+
+.map-zone-label {
+  fill: var(--secondary);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.map-zone-note {
+  fill: #b0564f;
+  font-size: 11px;
+}
+
+.map-burst {
+  fill: rgba(245, 158, 11, 0.28);
+  stroke: var(--accent);
+  stroke-width: 1.5;
+}
+
+.map-burst-draft {
+  fill: rgba(29, 78, 216, 0.14);
+  stroke: var(--primary);
+  stroke-width: 1.5;
+  stroke-dasharray: 5 4;
+}
+
+.map-burst-bad {
+  fill: rgba(220, 38, 38, 0.3);
+  stroke: var(--secondary);
+  stroke-width: 2.5;
+}
+
+.map-point {
+  cursor: pointer;
+}
+
+.map-point circle {
+  fill: #ffffff;
+  stroke: var(--primary);
+  stroke-width: 2.5;
+}
+
+.map-point-active circle {
+  fill: var(--primary);
+}
+
+.map-point-id {
+  fill: var(--primary);
+  font-size: 11px;
+  font-weight: 800;
+  text-anchor: middle;
+}
+
+.map-point-active .map-point-id {
+  fill: #ffffff;
+}
+
+.map-point-name {
+  fill: #334155;
+  font-size: 12px;
+  text-anchor: middle;
+}
+
+.map-wind line {
+  stroke: var(--primary);
+  stroke-width: 2.5;
+}
+
+.map-wind text {
+  fill: var(--primary);
+  font-size: 12px;
+  font-weight: 700;
+  text-anchor: end;
+}
+
+.map-wind marker path {
+  fill: var(--primary);
+}
+
+/* 表单 */
+
 .field-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 14px;
 }
 
@@ -165,13 +344,17 @@ label span {
   font-size: 13px;
 }
 
-input {
+input,
+select {
   width: 100%;
   min-height: 42px;
   border-radius: 7px;
   border: 1px solid var(--border);
   padding: 0 12px;
+  background: #ffffff;
 }
+
+/* 记录与脚本 */
 
 .records {
   display: grid;
@@ -180,7 +363,7 @@ input {
 
 .records article {
   display: grid;
-  grid-template-columns: 54px 1fr;
+  grid-template-columns: 84px 1fr auto;
   gap: 14px;
   align-items: center;
   padding: 14px;
@@ -189,13 +372,21 @@ input {
   background: #fbfdff;
 }
 
+.records article.record-bad {
+  border-color: var(--secondary);
+  background: #fff5f5;
+}
+
 .records b {
   display: grid;
   place-items: center;
-  height: 44px;
+  min-height: 44px;
   border-radius: 8px;
   color: #ffffff;
   background: linear-gradient(135deg, var(--primary), var(--accent));
+  font-size: 13px;
+  text-align: center;
+  padding: 4px;
 }
 
 .records h3 {
@@ -208,15 +399,109 @@ input {
   line-height: 1.6;
 }
 
+.empty {
+  color: #94a3b8;
+  margin: 0;
+}
+
+.notice {
+  margin: 16px 0 0;
+  padding: 12px 14px;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--primary) 8%, #ffffff);
+  border: 1px solid color-mix(in srgb, var(--primary) 30%, var(--border));
+  color: #1e3a8a;
+}
+
+.notice-bad {
+  background: #fef2f2;
+  border-color: #fca5a5;
+  color: var(--secondary);
+}
+
+.violations {
+  margin: 14px 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 10px;
+}
+
+.violations > li {
+  border: 1px solid #fca5a5;
+  background: #fff7f7;
+  border-radius: 8px;
+  padding: 12px 14px;
+}
+
+.violations > li > b {
+  color: var(--secondary);
+}
+
+.violations ul {
+  margin: 8px 0 0;
+  padding-left: 18px;
+  color: #7f1d1d;
+  line-height: 1.7;
+}
+
+.script-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.script-table th,
+.script-table td {
+  text-align: left;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.script-table th {
+  color: #64748b;
+  font-size: 13px;
+}
+
+.script-table tr.row-bad td {
+  background: #fff5f5;
+}
+
+.azimuth-input {
+  width: 90px;
+  min-height: 36px;
+}
+
+.preview-segment {
+  margin-bottom: 20px;
+}
+
+.preview-segment:last-child {
+  margin-bottom: 0;
+}
+
+.preview-segment > h3 {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border-left: 4px solid var(--accent);
+  padding-left: 10px;
+}
+
+.preview-segment > h3 span {
+  color: #64748b;
+  font-size: 13px;
+  font-weight: 400;
+}
+
 @media (max-width: 860px) {
   .metrics,
-  .workspace,
+  .console,
   .field-grid {
     grid-template-columns: 1fr;
   }
 
   .hero {
-    min-height: 210px;
+    min-height: 200px;
     padding: 24px;
   }
 }
